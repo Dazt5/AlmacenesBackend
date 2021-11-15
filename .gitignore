@@ -8,6 +8,9 @@ gradle
 gradle/**
 Productos/uploads/Productos.csv
 
+### MAVEN ####
+/**/.mvn
+
 ### STS ###
 .apt_generated
 .classpath
