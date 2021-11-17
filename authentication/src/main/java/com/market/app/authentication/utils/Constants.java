@@ -2,12 +2,16 @@ package com.market.app.authentication.utils;
 
 public final class Constants {
 
-    public static final class SuccessfulMessages {
+    public static final class User{
+        public static final String DEFAULT_USER_USERNAME = "admin";
+        public static final  String DEFAULT_USER_PASSWORD = "password";
+    }
 
+
+    public static final class SuccessfulMessages {
         public static final String MESSAGE_RESOURCE_CREATED = "Registro creado satisfactoriamente";
         public static final String MESSAGE_RESOURCE_UPDATED = "Registro actualizado satisfactoriamente";
         public static final String MESSAGE_RESOURCE_DELETED = "Registro eliminado satisfactoriamente";
-
     }
 
     public static final class ErrorMessages{
