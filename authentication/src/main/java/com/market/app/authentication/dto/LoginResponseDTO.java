@@ -1,5 +1,8 @@
 package com.market.app.authentication.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoginResponseDTO {
 
     private String message;
