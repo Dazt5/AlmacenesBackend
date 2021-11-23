@@ -10,6 +10,10 @@ gradle/**
 ### MAVEN ####
 /**/.mvn
 
+### CUSTOM IGNORES ###
+uploads/
+
+
 ### STS ###
 .apt_generated
 .classpath
