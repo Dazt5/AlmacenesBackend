@@ -38,7 +38,7 @@ public class ProviderServiceImpl implements IProviderService {
 		if(actualProvider == null) return null;
 		
 		actualProvider.setNombre_proveedor(provider.getNombre_proveedor());
-		actualProvider.setNombre_proveedor(provider.getTelefono_proveedor());
+		actualProvider.setTelefono_proveedor(provider.getTelefono_proveedor());
 		actualProvider.setDireccion_proveedor(provider.getDireccion_proveedor());
 		actualProvider.setCiudad_proveedor(provider.getCiudad_proveedor());
 		
