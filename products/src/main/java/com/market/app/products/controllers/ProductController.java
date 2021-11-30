@@ -1,7 +1,9 @@
 package com.market.app.products.controllers;
 
+import com.market.app.products.client.ProviderClient;
 import com.market.app.products.dto.GeneralResponseDTO;
 import com.market.app.products.entity.Product;
+import com.market.app.products.model.Provider;
 import com.market.app.products.services.implementations.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,16 +12,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.math.BigInteger;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 
 import static com.market.app.products.utils.Constants.ErrorMessages.*;
 import static com.market.app.products.utils.Constants.SuccessfulMessages.*;
+import static com.market.app.products.utils.Constants.JWTConfig.*;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-        
+	
+	@Autowired
+	ProviderClient providerClient;
+	
     @Autowired
     private ProductServiceImpl productService;
     
@@ -34,8 +43,10 @@ public class ProductController {
     }
     
     @PostMapping("/")
-    public ResponseEntity<GeneralResponseDTO> createProduct(@RequestBody Product producto){
+    public ResponseEntity<GeneralResponseDTO> createProduct(HttpServletRequest request, @RequestBody Product producto){
         try {
+        	
+        	String token = request.getHeader(AUTHORIZATION_HEADER_NAME);
             
             if (producto.getCodigo_producto() == null) {
                 GeneralResponseDTO response = new GeneralResponseDTO();
@@ -49,7 +60,16 @@ public class ProductController {
                 GeneralResponseDTO response = new GeneralResponseDTO();
                 response.setMessage(MESSAGE_RESOURCE_CONFLICT);
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-            } 
+            }            
+            
+            Provider provider = ((providerClient.getProviderById(token, producto.getNitproveedor())).getBody()).orElse(null);
+            //System.out.println("-> " + provider.toString());
+            
+            if(provider == null) {
+            	GeneralResponseDTO response = new GeneralResponseDTO();
+            	response.setMessage("No existe ningun proveedor relacionado al nit que proporsionó, por favor verifiquelo.");
+            	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            }
             
             productService.create(producto);
             GeneralResponseDTO response = new GeneralResponseDTO();
@@ -59,7 +79,7 @@ public class ProductController {
         } catch (Exception exception) {
             GeneralResponseDTO response = new GeneralResponseDTO();
             response.setMessage(MESSAGE_INTERNAL_SERVER_ERROR + exception.getMessage());
-            return ResponseEntity.ok().body(response);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
     

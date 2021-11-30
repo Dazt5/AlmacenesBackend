@@ -2,8 +2,11 @@ package com.market.app.products.entity;
 
 import java.math.BigInteger;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.market.app.products.model.Provider;
 
 @Document(collection = "productos")
 public class Product {
@@ -20,6 +23,9 @@ public class Product {
     private Double ivacompra;
     @Field("precio_venta")
     private Double precio_venta;
+    
+    @Transient
+    private Provider provider;
     
     public Product() {        
     }

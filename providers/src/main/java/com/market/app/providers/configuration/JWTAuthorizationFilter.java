@@ -53,8 +53,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private Boolean checkToken(HttpServletRequest request, HttpServletResponse response) {
-        String authenticationHeader = request.getHeader(AUTHORIZATION_HEADER_NAME);
-        System.out.println("HEADER:" + authenticationHeader);
+        String authenticationHeader = request.getHeader(AUTHORIZATION_HEADER_NAME);        
         return authenticationHeader != null && authenticationHeader.startsWith(BEARER_PREFIX_HEADER);
     }
 }
