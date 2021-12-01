@@ -4,6 +4,7 @@ public class LoginRequestDTO {
 
     private String usuario;
     private String password;
+    private String subsidiary;
 
     public String getUsuario() {
         return usuario;
@@ -19,6 +20,14 @@ public class LoginRequestDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSubsidiary() {
+        return subsidiary;
+    }
+
+    public void setSubsidiary(String subsidiary) {
+        this.subsidiary = subsidiary;
     }
 
     @Override
