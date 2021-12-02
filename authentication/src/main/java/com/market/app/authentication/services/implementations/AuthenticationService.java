@@ -30,7 +30,7 @@ public class AuthenticationService {
         if( user != null && loginRequest.getPassword().equals(user.getPassword())) {
             LoginResponseDTO responseDTO = new LoginResponseDTO();
             responseDTO.setMessage("Usuario autenticado correctamente");
-            responseDTO.setToken(jwtManager.getJWTToken(loginRequest.getUsuario()));
+            responseDTO.setToken(jwtManager.getJWTToken(loginRequest.getUsuario(), loginRequest.getSubsidiary()));
             return ResponseEntity.ok().body(responseDTO);
         }
 

@@ -16,7 +16,7 @@ import static com.market.app.authentication.utils.Constants.JWTConfig.*;
 @Configuration
 public class JWTManager {
 
-    public String getJWTToken(String username) {
+    public String getJWTToken(String username, String subsidiary) {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_ADMIN");
 
@@ -28,6 +28,7 @@ public class JWTManager {
                         grantedAuthorities.stream()
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
+                .claim("subsidiary",subsidiary)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 6000000))
                 .signWith(SignatureAlgorithm.HS512,
