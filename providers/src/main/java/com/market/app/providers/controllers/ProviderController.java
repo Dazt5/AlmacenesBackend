@@ -4,12 +4,15 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.market.app.providers.dto.GeneralResponseDTO;
+import com.market.app.providers.dto.ProviderRequestDTO;
 import com.market.app.providers.entity.Provider;
 import com.market.app.providers.services.implementations.ProviderServiceImpl;
 
@@ -35,7 +38,7 @@ public class ProviderController {
 	}
 	
 	@PostMapping("/")
-	public ResponseEntity<GeneralResponseDTO> createProvider(@RequestBody Provider provider){
+	public ResponseEntity<GeneralResponseDTO> createProvider(@RequestBody @Valid ProviderRequestDTO provider){
 		try {
 			
 			if(provider.getNitproveedor() == null) {
@@ -65,9 +68,9 @@ public class ProviderController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<GeneralResponseDTO> updateProviderById(@RequestBody Provider provider, @PathVariable BigInteger id){
+	public ResponseEntity<GeneralResponseDTO> updateProviderById(@RequestBody @Valid ProviderRequestDTO provider, @PathVariable BigInteger id){
 		try {
-			Provider actualProvider = providerService.update(provider, id);
+			Provider actualProvider = providerService.update(provider.toEntity(), id);
 			
 			if(actualProvider == null) {
 				GeneralResponseDTO response = new GeneralResponseDTO();

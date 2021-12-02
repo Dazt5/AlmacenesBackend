@@ -4,11 +4,14 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.market.app.customers.dto.CustomerRequestDTO;
 import com.market.app.customers.dto.GeneralResponseDTO;
 import com.market.app.customers.entity.Customer;
 import com.market.app.customers.services.implementations.CustomerServiceImpl;
@@ -24,6 +27,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerServiceImpl customerService;
 	
+	
 	@GetMapping("/")
 	public ResponseEntity<ArrayList<Customer>> getAllCustomers() {
 		return ResponseEntity.ok().body(customerService.getAll());
@@ -35,7 +39,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/")
-	public ResponseEntity<GeneralResponseDTO> createCustomer(@RequestBody Customer customer){
+	public ResponseEntity<GeneralResponseDTO> createCustomer(@RequestBody @Valid CustomerRequestDTO customer){
 		try {
 			
 			if(customer.getCedula_cliente() == null) {
@@ -65,9 +69,9 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<GeneralResponseDTO> updateCustomerById(@RequestBody Customer customer, @PathVariable BigInteger id) {
+	public ResponseEntity<GeneralResponseDTO> updateCustomerById(@RequestBody @Valid CustomerRequestDTO customer, @PathVariable BigInteger id) {
 		try {			
-			Customer actualCustomer = customerService.update(customer, id);
+			Customer actualCustomer = customerService.update(customer.toEntity(), id);
 			if(actualCustomer == null) {
 				GeneralResponseDTO response = new GeneralResponseDTO();
 				response.setMessage(MESSAGE_RESOURCE_NOT_FOUND);

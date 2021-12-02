@@ -1,6 +1,7 @@
 package com.market.app.products.services.implementations;
 
 import com.market.app.products.dto.GeneralResponseDTO;
+import com.market.app.products.dto.ProductRequestDTO;
 import com.market.app.products.entity.Product;
 import com.market.app.products.services.interfaces.IFileService;
 
@@ -11,15 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.math.BigInteger;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.market.app.products.utils.Constants.SuccessfulMessages.*;
 import static com.market.app.products.utils.Constants.ErrorMessages.*;
@@ -78,7 +71,7 @@ public class FileServiceImpl implements IFileService {
                 Double ivacompra = Double.parseDouble(product[4]);
                 Double precio_venta = Double.parseDouble(product[5]);
 
-                Product producto = new Product(codigo_producto, nombre_producto, nitproveedor, precio_compra, ivacompra, precio_venta);
+                ProductRequestDTO producto = new ProductRequestDTO(codigo_producto, nombre_producto, nitproveedor, precio_compra, ivacompra, precio_venta);
                 productService.create(producto);
             }
             GeneralResponseDTO response = new GeneralResponseDTO();

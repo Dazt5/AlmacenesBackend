@@ -3,6 +3,7 @@ package com.market.app.customers.services.implementations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.market.app.customers.dto.CustomerRequestDTO;
 import com.market.app.customers.entity.Customer;
 import com.market.app.customers.repository.ICustomerRepository;
 import com.market.app.customers.services.interfaces.ICustomerService;
@@ -28,8 +29,8 @@ public class CustomerServiceImpl implements ICustomerService{
 	}
 
 	@Override
-	public Customer create(Customer customer) {		
-		return customerRepository.save(customer);
+	public Customer create(CustomerRequestDTO customer) {		
+		return customerRepository.save(customer.toEntity());
 	}
 
 	@Override

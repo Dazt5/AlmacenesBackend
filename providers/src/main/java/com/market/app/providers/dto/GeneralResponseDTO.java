@@ -1,7 +1,14 @@
 package com.market.app.providers.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({
+	"message"
+})
 public class GeneralResponseDTO {
 	
+	@JsonProperty("message")
 	private String message;
 
 	public String getMessage() {

@@ -2,6 +2,7 @@ package com.market.app.products.controllers;
 
 import com.market.app.products.client.ProviderClient;
 import com.market.app.products.dto.GeneralResponseDTO;
+import com.market.app.products.dto.ProductRequestDTO;
 import com.market.app.products.entity.Product;
 import com.market.app.products.model.Provider;
 import com.market.app.products.services.implementations.ProductServiceImpl;
@@ -14,6 +15,7 @@ import java.math.BigInteger;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 
@@ -43,7 +45,7 @@ public class ProductController {
     }
     
     @PostMapping("/")
-    public ResponseEntity<GeneralResponseDTO> createProduct(HttpServletRequest request, @RequestBody Product producto){
+    public ResponseEntity<GeneralResponseDTO> createProduct(HttpServletRequest request, @RequestBody @Valid ProductRequestDTO producto){
         try {
         	
         	String token = request.getHeader(AUTHORIZATION_HEADER_NAME);
@@ -84,9 +86,9 @@ public class ProductController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<GeneralResponseDTO> updateProductById(@RequestBody Product producto, @PathVariable BigInteger id){
+    public ResponseEntity<GeneralResponseDTO> updateProductById(@RequestBody @Valid ProductRequestDTO producto, @PathVariable BigInteger id){
         try {
-            Product updateProduct = productService.update(producto, id);
+            Product updateProduct = productService.update(producto.toEntity(), id);
             if (updateProduct == null) {
                 GeneralResponseDTO response = new GeneralResponseDTO();
                 response.setMessage(MESSAGE_RESOURCE_NOT_FOUND);

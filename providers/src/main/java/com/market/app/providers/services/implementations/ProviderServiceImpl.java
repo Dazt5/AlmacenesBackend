@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.market.app.providers.dto.ProviderRequestDTO;
 import com.market.app.providers.entity.Provider;
 import com.market.app.providers.repository.IProviderRepository;
 import com.market.app.providers.services.interfaces.IProviderService;
@@ -28,8 +29,8 @@ public class ProviderServiceImpl implements IProviderService {
 	}
 
 	@Override
-	public Provider create(Provider provider) {
-		return providerRepository.save(provider);
+	public Provider create(ProviderRequestDTO provider) {
+		return providerRepository.save(provider.toEntity());
 	}
 
 	@Override

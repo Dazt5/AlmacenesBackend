@@ -1,6 +1,7 @@
 package com.market.app.products.services.implementations;
 
 import com.market.app.products.dto.GeneralResponseDTO;
+import com.market.app.products.dto.ProductRequestDTO;
 import com.market.app.products.entity.Product;
 import com.market.app.products.repository.IProductRepository;
 import com.market.app.products.services.interfaces.IProductService;
@@ -30,8 +31,8 @@ public class ProductServiceImpl implements IProductService{
     }
     
     @Override
-    public Product create(Product producto){
-        return productRepository.save(producto);
+    public Product create(ProductRequestDTO producto){
+        return productRepository.save(producto.toEntity());
     }
     
     @Override
