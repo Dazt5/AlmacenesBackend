@@ -5,6 +5,7 @@ import java.math.BigInteger;
 public class DetalleVentas {
 
 	private BigInteger codigo_producto;
+	private String nombre_producto;
 	private Integer cantidad_producto;	
 	private Double valor_total;
 	private Double valor_venta;
@@ -14,10 +15,11 @@ public class DetalleVentas {
 		
 	}
 
-	public DetalleVentas(Integer cantidad_producto, BigInteger codigo_producto, Double valor_total, Double valor_venta,
+	public DetalleVentas(Integer cantidad_producto, String nombre_producto, BigInteger codigo_producto, Double valor_total, Double valor_venta,
 			Double valoriva) {
 		super();
 		this.cantidad_producto = cantidad_producto;
+		this.nombre_producto = nombre_producto;
 		this.codigo_producto = codigo_producto;
 		this.valor_total = valor_total;
 		this.valor_venta = valor_venta;
@@ -30,6 +32,14 @@ public class DetalleVentas {
 
 	public void setCantidad_producto(Integer cantidad_producto) {
 		this.cantidad_producto = cantidad_producto;
+	}
+
+	public String getNombre_producto() {
+		return nombre_producto;
+	}
+
+	public void setNombre_producto(String nombre_producto) {
+		this.nombre_producto = nombre_producto;
 	}
 
 	public BigInteger getCodigo_producto() {

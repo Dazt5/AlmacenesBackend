@@ -12,11 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Sale {
 
 	@Id
-	private BigInteger codigo_venta;
+	private String codigo_venta;
 	@Field("cedula_cliente")
 	private BigInteger cedula_cliente;
-	@Field("detalle_venta")
-	private BigInteger detalle_venta;
 	@Field("sucursal")
 	private BigInteger sucursal;
 	@Field("ivaventa")
@@ -31,12 +29,11 @@ public class Sale {
 		
 	}
 
-	public Sale(BigInteger codigo_venta, BigInteger cedula_cliente, BigInteger detalle_venta, BigInteger sucursal,
+	public Sale(String codigo_venta, BigInteger cedula_cliente, BigInteger detalle_venta, BigInteger sucursal,
 			Double ivaventa, Double valor_venta, Double total_venta, List<DetalleVentas> detalleVenta) {
 		super();
 		this.codigo_venta = codigo_venta;
 		this.cedula_cliente = cedula_cliente;
-		this.detalle_venta = detalle_venta;
 		this.sucursal = sucursal;
 		this.ivaventa = ivaventa;
 		this.valor_venta = valor_venta;
@@ -44,11 +41,11 @@ public class Sale {
 		this.detalleVenta = detalleVenta;
 	}
 
-	public BigInteger getCodigo_venta() {
+	public String getCodigo_venta() {
 		return codigo_venta;
 	}
 
-	public void setCodigo_venta(BigInteger codigo_venta) {
+	public void setCodigo_venta(String codigo_venta) {
 		this.codigo_venta = codigo_venta;
 	}
 
@@ -58,14 +55,6 @@ public class Sale {
 
 	public void setCedula_cliente(BigInteger cedula_cliente) {
 		this.cedula_cliente = cedula_cliente;
-	}
-
-	public BigInteger getDetalle_venta() {
-		return detalle_venta;
-	}
-
-	public void setDetalle_venta(BigInteger detalle_venta) {
-		this.detalle_venta = detalle_venta;
 	}
 	
 	public BigInteger getSucursal() {
@@ -111,8 +100,7 @@ public class Sale {
 	@Override
 	public String toString() {
 		return "Sale [codigo_venta=" + codigo_venta + 
-				", cedula_cliente=" + cedula_cliente + 
-				", detalle_venta=" + detalle_venta + 
+				", cedula_cliente=" + cedula_cliente +
 				", sucursal=" + sucursal + 
 				", ivaventa=" + ivaventa + 
 				", valor_venta=" + valor_venta + 

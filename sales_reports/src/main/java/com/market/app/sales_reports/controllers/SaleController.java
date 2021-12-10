@@ -40,29 +40,15 @@ public class SaleController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Sale>> getSaleById(@PathVariable BigInteger id) {
+	public ResponseEntity<Optional<Sale>> getSaleById(@PathVariable String id) {
 		return ResponseEntity.ok().body(saleService.getById(id));
 	}
 	
 	@PostMapping("/")
 	public ResponseEntity<GeneralResponseDTO> createSale(@RequestBody @Valid SaleRequestDTO sale) {
-		
+
 		try {
-			
-			if(sale.getCodigo_venta() == null) {
-				GeneralResponseDTO response = new GeneralResponseDTO();
-				response.setMessage("El codigo de la venta es obligatorio");
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-			}
-			
-			Sale saleExist = saleService.getById(sale.getCodigo_venta()).orElse(null);
-			
-			if(saleExist != null) {
-				GeneralResponseDTO response = new GeneralResponseDTO();
-				response.setMessage(MESSAGE_RESOURCE_CONFLICT);
-				return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-			}
-			
+			System.out.println(sale.toString());
 			saleService.create(sale);
 			GeneralResponseDTO response = new GeneralResponseDTO();
 			response.setMessage(MESSAGE_RESOURCE_CREATED);		

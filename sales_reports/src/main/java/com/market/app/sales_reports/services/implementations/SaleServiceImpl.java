@@ -24,7 +24,7 @@ public class SaleServiceImpl implements ISaleService {
 	}
 	
 	@Override
-	public Optional<Sale> getById(BigInteger id) {
+	public Optional<Sale> getById(String id) {
 		return saleRepository.findById(id);
 	}
 

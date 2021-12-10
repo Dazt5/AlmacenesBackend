@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.market.app.sales_reports.entity.Sale;
 
-public interface ISaleRepository extends MongoRepository<Sale, BigInteger>{
+public interface ISaleRepository extends MongoRepository<Sale, String>{
 
 	//public ArrayList<Sale> findByCedulaCliente(BigInteger cedulaCliente);
 	
