@@ -13,7 +13,7 @@ import com.market.app.sales_reports.entity.DetalleVentas;
 import com.market.app.sales_reports.entity.Sale;
 
 public class SaleRequestDTO {
-
+	
     @PositiveOrZero(message = "La cedula del cliente tiene que ser mayour o igual a 0")
     @JsonProperty("cedula_cliente")
     private BigInteger cedula_cliente;
