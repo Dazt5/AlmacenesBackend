@@ -1,10 +1,9 @@
 package com.market.app.sales_reports.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.math.BigDecimal;
 
 @Document(collection = "sucursales")
 public class Subsidiary {
@@ -15,8 +14,8 @@ public class Subsidiary {
     @Field("ciudad")
     private String ciudad;
 
-    @Field("total_ventas")
-    private BigDecimal total_ventas;
+    @Transient
+    private Double total_ventas;
 
     public String getId() {
         return id;
@@ -34,11 +33,11 @@ public class Subsidiary {
         this.ciudad = ciudad;
     }
 
-    public BigDecimal getTotal_ventas() {
+    public Double getTotal_ventas() {
         return total_ventas;
     }
 
-    public void setTotal_ventas(BigDecimal total_ventas) {
+    public void setTotal_ventas(Double total_ventas) {
         this.total_ventas = total_ventas;
     }
 }
