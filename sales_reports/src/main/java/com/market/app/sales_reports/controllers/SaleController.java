@@ -1,11 +1,12 @@
 package com.market.app.sales_reports.controllers;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.market.app.sales_reports.utils.JWTManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.market.app.sales_reports.dto.GeneralResponseDTO;
 import com.market.app.sales_reports.dto.SaleRequestDTO;
-import com.market.app.sales_reports.entity.DetalleVentas;
 import com.market.app.sales_reports.entity.Sale;
 import com.market.app.sales_reports.services.implementations.SaleServiceImpl;
 
@@ -33,6 +33,9 @@ public class SaleController {
 	
 	@Autowired
 	private SaleServiceImpl saleService;
+
+	@Autowired
+	private JWTManager jwtManager;
 	
 	@GetMapping("/")
 	public ResponseEntity<ArrayList<Sale>> getAllSales() {
@@ -45,11 +48,13 @@ public class SaleController {
 	}
 	
 	@PostMapping("/")
-	public ResponseEntity<GeneralResponseDTO> createSale(@RequestBody @Valid SaleRequestDTO sale) {
+	public ResponseEntity<GeneralResponseDTO> createSale(@RequestBody @Valid SaleRequestDTO sale, HttpServletRequest request) {
 
 		try {
-			System.out.println(sale.toString());
-			saleService.create(sale);
+
+			String subsidiary = jwtManager.getSubsidiary(request);
+
+			saleService.create(sale,subsidiary);
 			GeneralResponseDTO response = new GeneralResponseDTO();
 			response.setMessage(MESSAGE_RESOURCE_CREATED);		
 			return ResponseEntity.ok().body(response);

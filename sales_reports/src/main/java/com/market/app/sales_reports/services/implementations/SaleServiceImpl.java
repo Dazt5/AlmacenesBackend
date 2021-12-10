@@ -1,6 +1,5 @@
 package com.market.app.sales_reports.services.implementations;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -29,7 +28,11 @@ public class SaleServiceImpl implements ISaleService {
 	}
 
 	@Override
-	public Sale create(SaleRequestDTO sale) {
+	public Sale create(SaleRequestDTO sale, String subsidiary) {
+
+		Sale newSale = sale.toEntity();
+		newSale.setSucursal(subsidiary);
+
 		return saleRepository.save(sale.toEntity());
 	}
 

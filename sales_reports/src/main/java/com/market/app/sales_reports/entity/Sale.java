@@ -16,7 +16,7 @@ public class Sale {
 	@Field("cedula_cliente")
 	private BigInteger cedula_cliente;
 	@Field("sucursal")
-	private BigInteger sucursal;
+	private String sucursal;
 	@Field("ivaventa")
 	private Double ivaventa;
 	@Field("valor_venta")
@@ -29,7 +29,7 @@ public class Sale {
 		
 	}
 
-	public Sale(String codigo_venta, BigInteger cedula_cliente, BigInteger detalle_venta, BigInteger sucursal,
+	public Sale(String codigo_venta, BigInteger cedula_cliente, BigInteger detalle_venta, String sucursal,
 			Double ivaventa, Double valor_venta, Double total_venta, List<DetalleVentas> detalleVenta) {
 		super();
 		this.codigo_venta = codigo_venta;
@@ -56,12 +56,12 @@ public class Sale {
 	public void setCedula_cliente(BigInteger cedula_cliente) {
 		this.cedula_cliente = cedula_cliente;
 	}
-	
-	public BigInteger getSucursal() {
+
+	public String getSucursal() {
 		return sucursal;
 	}
 
-	public void setSucursal(BigInteger sucursal) {
+	public void setSucursal(String sucursal) {
 		this.sucursal = sucursal;
 	}
 

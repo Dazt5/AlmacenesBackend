@@ -11,6 +11,6 @@ public interface ISaleService {
 
 	public ArrayList<Sale> getAll();
 	public Optional<Sale> getById(String id);
-	public Sale create(SaleRequestDTO sale);
+	public Sale create(SaleRequestDTO sale, String subsidiary);
 	
 }
