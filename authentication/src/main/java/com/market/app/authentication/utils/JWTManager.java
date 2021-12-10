@@ -39,4 +39,9 @@ public class JWTManager {
         String jwtToken = request.getHeader(AUTHORIZATION_HEADER_NAME).replace(BEARER_PREFIX_HEADER, "");
         return Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwtToken).getBody().getSubject();
     }
+
+    public String getSubsidiary(HttpServletRequest request){
+        String jwtToken = request.getHeader(AUTHORIZATION_HEADER_NAME).replace(BEARER_PREFIX_HEADER, "");
+        return Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwtToken).getBody().get("subsidiary").toString();
+    }
 }
